@@ -5,10 +5,12 @@ export class Button extends MenuObject{
         super();
         this.width= 200;
         this.height=100;
-        this.x = (cnv.height/2) - (this.width/2);
-        this.y = (cnv.width/2) - (this.height/2);
+        this.x = 0;
+        this.y = 0;
     }
     draw(cnv,ctx) {
+        this.x = (cnv.height/2) - (this.width/2);
+        this.y = (cnv.width/2) - (this.height/2);
         ctx.strokeStyle='black';
         ctx.lineWidth = 2;
         ctx.rect(this.x,this.y,this.width,this.height);

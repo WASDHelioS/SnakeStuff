@@ -35,7 +35,6 @@ export class Food extends GameObject{
 
         this.length = (timestamp % this.color_cycle_length)/ this.color_cycle_length;
         this.color = this.colorHelper.radianbow(this.length * Math.PI * 2);
-        console.log(this.color);
     }
     
     destroy() {
