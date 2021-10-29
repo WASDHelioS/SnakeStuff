@@ -1,5 +1,10 @@
 import { Drawable } from "./drawable.js";
 
+
+/**
+ * Drawable GameObject. Extend this in order to create a gameObject with Hitbox (bound).
+ * 
+ */
 export class GameObject extends Drawable{
     constructor(x,y, size){
         super();

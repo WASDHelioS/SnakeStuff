@@ -1,7 +1,3 @@
-// Run collision check from here;
-// Manage returned value appropriately
-// If food > run food logic & return dead = false;
-// If body > return dead = false;
 
 
 export class CollisionManager{
@@ -9,9 +5,14 @@ export class CollisionManager{
   }
 
 
-  //Generic collision checking. checks if _PLAYER_ collides with any object in our list.
-  //if so: Return the object the player collided with.
-  //if not: Return null.
+  /**
+   * Generic collision checking. checks if _PLAYER_ collides with any object in our list.
+   * if so: Return the object the player collided with.
+   * if not: Return null.
+   * @param {*} objects gameObjects
+   * @returns Object with which player collides
+   */
+
   checkCollision(objects) {
     //sorting for breaking early when player x < obj.hbx, cause if player x < obj.hbx, any obj after that will also not need to be checked
     var temp =[];

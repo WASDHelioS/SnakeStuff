@@ -1,18 +1,26 @@
-// If food > run food logic & return dead = false;
-// If body > return dead = false;
 
 import {CollisionManager} from "./collisionManager.js";
-import {Food} from "./Drawables/food.js";
-import { PlayerBody } from "./Drawables/playerBody.js";
+import {Food} from "../Drawables/food.js";
+import { PlayerBody } from "../Drawables/playerBody.js";
 
-export class CollisionHandler{
+
+/**
+ * Implementation of collision
+ */
+
+export class CollisionHandler extends CollisionManager{
   constructor() {
-    this.collisionManager = new CollisionManager();
+    super();
   }
 
-
+/**
+ * 
+ * @param {*} objects gameObjects
+ * @param {*} scoreHandler Scorekeeper
+ * @returns new list of gameObjects, OR boolean gameOver
+ */
   handleCollision(objects, scoreHandler) {
-    var collision = this.collisionManager.checkCollision(objects);
+    var collision = super.checkCollision(objects);
     if(collision == null) {
       return objects;
     }

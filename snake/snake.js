@@ -1,19 +1,13 @@
 import { Button } from "./Drawables/button.js";
-import { Engine } from "./engine.js";
-import { InputManager } from "./inputManager.js";
+import { Engine } from "./Engine/engine.js";
 import { Player } from "./Drawables/player.js";
-import {ScoreHandler} from "./scoreHandler.js";
-import { InputHandler } from "./inputHandler.js";
-
+import {ScoreHandler} from "./Engine/scoreHandler.js";
 
 var state;
 var engine;
 
 var button;
 var buttonDrawn;
-
-var inputHandler = new InputHandler(new InputManager());
-
 
 //object containing all gameobjects, can add more if needed.
 var gameObjects = {
@@ -26,10 +20,8 @@ var menuObjects = {
   buttons: [],
 };
 
-
 const speed = 4;
 const turning_speed = 3;
-
 
 //mode, hitbox > no hitbox. Key=LeftShift
 var mode;
@@ -64,7 +56,7 @@ export function refresh() {
   }
 }
 
-//window.onload= function() {refresh();}
+window.onload= function() {refresh();}
 
 function init() {
     gameObjects.player=null;
@@ -72,12 +64,15 @@ function init() {
     gameObjects.body=[];
 
     menuObjects.buttons=[];
-
+  if(engine == null) {
     engine = new Engine(60);
+  }
+  if(scoreHandler == null) {
     scoreHandler = new ScoreHandler();
-    initMenu();
+  }
+  initMenu();
 
-    requestAnimationFrame(loop);
+  requestAnimationFrame(loop);
 }
 
 function initMenu() {
@@ -107,11 +102,12 @@ function loop(timestamp) {
     delta = now - then;
     if(delta > interval) {
         then = now - (delta % interval);
-        //DRAW BUTTON
+        
+        //DRAW MENU
         if(state=="onLoad") {
             if(!buttonDrawn) {
-                engine.update(menuObjects,timestamp);
-                engine.draw(menuObjects);
+                engine.renderer.update(menuObjects,timestamp);
+                engine.renderer.draw(menuObjects);
                 buttonDrawn=true;
             }
         }
@@ -126,7 +122,7 @@ function loop(timestamp) {
           }
 
           //HANDLE INPUT
-          mode = inputHandler.handleInput(gameObjects.player,turning_speed, mode);
+          mode = engine.handleInput(gameObjects.player,turning_speed, mode);
 
           //GENERATE FOOD AND POPULATE LIST
           var newfood = engine.generateFood(gameObjects.food.length);
@@ -143,9 +139,8 @@ function loop(timestamp) {
           }
 
           //UD
-          engine.update(gameObjects,timestamp);
-          engine.draw(gameObjects, mode);
-          engine.drawScore(scoreHandler.score);
+          engine.renderObjects(gameObjects,timestamp);
+          engine.renderScore(scoreHandler.score);
 
 
 

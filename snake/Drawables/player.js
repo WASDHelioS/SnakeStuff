@@ -1,4 +1,4 @@
-import { degreesToRadians } from "../mathHelper.js";
+import { degreesToRadians } from "../Utils/mathHelper.js";
 import { GameObject } from "./gameObject.js";
 
 
@@ -36,7 +36,6 @@ export class Player extends GameObject{
         ctx.stroke();
     }
     move() {
-
         this.x -= this.speed * Math.sin(degreesToRadians(this.direction));
         this.y += this.speed * Math.cos(degreesToRadians(this.direction));
         

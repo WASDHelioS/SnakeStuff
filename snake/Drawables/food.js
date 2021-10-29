@@ -1,5 +1,5 @@
 
-import { ColorHelper } from "../colorHelper.js";
+import { ColorHelper } from "../Utils/colorHelper.js";
 import { GameObject } from "./gameObject.js";
 
 

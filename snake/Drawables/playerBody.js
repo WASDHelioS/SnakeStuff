@@ -1,4 +1,4 @@
-import { degreesToRadians } from "../mathHelper.js";
+import { degreesToRadians } from "../Utils/mathHelper.js";
 import { GameObject } from "./gameObject.js";
 
 export class PlayerBody extends GameObject{
@@ -18,8 +18,8 @@ export class PlayerBody extends GameObject{
         this.minDistance = 1;
         this.maxDistance = 4;
         this.first = first;
-
     }
+
     draw(cnv,ctx) {
         ctx.strokeStyle='black';
         ctx.lineWidth = 5;
@@ -29,8 +29,9 @@ export class PlayerBody extends GameObject{
         ctx.closePath();
         ctx.stroke();
     }
-    move() {
-        
+    
+    move(time) {
+        time/=30;
 
         var dx = this.player.x - this.x;
         if(dx > 30) {
